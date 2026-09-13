@@ -1,9 +1,15 @@
-"""Regenerate the Merchant Center title supplemental feed for careerjerseys.com.
+"""Regenerate the Merchant Center supplemental feed for careerjerseys.com.
 
 Why this exists: the storefront product titles are short and readable for
 shoppers. Google Shopping wants the long, keyword-rich form. The long form
 lives in the Shopify product metafield custom.full_title, and Merchant Center
 reads it from the TSV this script writes.
+
+The feed also carries `size`. Career Jerseys that ship as a wearable garment
+have a variant titled "Loose Jersey"; those offers get size L/XL. Framed and
+Premium Number editions do not carry that variant title, so they are excluded
+by construction. This replaces the old one-time size_feed.tsv upload, which
+decayed for the same reason the old title feeds did.
 
 The script also self-heals: any active product with an empty custom.full_title
 gets the current product title copied into it, and is listed in
@@ -22,6 +28,8 @@ CLIENT_SECRET = os.environ["SHOPIFY_CLIENT_SECRET"]
 API = "2025-07"
 OUT_DIR = "feeds"
 MAX_TITLE = 150  # Google's hard limit on the title attribute
+SIZE_VARIANT = "loose jersey"
+SIZE_VALUE = "L/XL"
 
 BULK_QUERY = """
 {
@@ -31,7 +39,7 @@ BULK_QUERY = """
       title
       handle
       metafield(namespace: "custom", key: "full_title") { value }
-      variants { edges { node { id } } }
+      variants { edges { node { id title } } }
     } }
   }
 }
@@ -144,7 +152,9 @@ def main():
                 "variants": [],
             }
         else:
-            variants.setdefault(o["__parentId"], []).append(o["id"])
+            variants.setdefault(o["__parentId"], []).append(
+                (o["id"], o.get("title") or "")
+            )
     for pid, vids in variants.items():
         if pid in products:
             products[pid]["variants"] = vids
@@ -156,16 +166,22 @@ def main():
 
     os.makedirs(OUT_DIR, exist_ok=True)
     rows = 0
+    sized = 0
     oversize = []
     with open(f"{OUT_DIR}/full_title_feed.tsv", "w", encoding="utf-8") as f:
-        f.write("id\ttitle\n")
+        f.write("id\ttitle\tsize\n")
         for p in products.values():
             if len(p["full_title"]) > MAX_TITLE:
                 oversize.append(p)
             value = clamp(p["full_title"])
             pid = p["id"].rsplit("/", 1)[-1]
-            for vid in p["variants"]:
-                f.write(f"shopify_CA_{pid}_{vid.rsplit('/', 1)[-1]}\t{value}\n")
+            for vid, vtitle in p["variants"]:
+                size = SIZE_VALUE if SIZE_VARIANT in vtitle.lower() else ""
+                if size:
+                    sized += 1
+                f.write(
+                    f"shopify_CA_{pid}_{vid.rsplit('/', 1)[-1]}\t{value}\t{size}\n"
+                )
                 rows += 1
 
     with open(f"{OUT_DIR}/missing_full_title.txt", "w", encoding="utf-8") as f:
@@ -183,9 +199,12 @@ def main():
 
     print(f"wrote {rows} offer rows from {len(products)} active products")
     print(f"backfilled custom.full_title on {len(healed)} products")
+    print(f"{sized} offers tagged size {SIZE_VALUE}")
     print(f"{len(oversize)} titles exceed {MAX_TITLE} characters and were cut")
     if rows < 1500:
         print("::warning::feed row count is unexpectedly low, check before trusting it")
+    if sized == 0:
+        print("::warning::no Loose Jersey variants matched, size column is empty")
     return 0
 
 
