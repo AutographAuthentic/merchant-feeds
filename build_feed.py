@@ -21,6 +21,7 @@ CLIENT_ID = os.environ["SHOPIFY_CLIENT_ID"]
 CLIENT_SECRET = os.environ["SHOPIFY_CLIENT_SECRET"]
 API = "2025-07"
 OUT_DIR = "feeds"
+MAX_TITLE = 150  # Google's hard limit on the title attribute
 
 BULK_QUERY = """
 {
@@ -115,6 +116,16 @@ def backfill(tok, products):
     return empty
 
 
+def clamp(value):
+    """Fit the title inside Google's limit without cutting a word in half."""
+    value = value.replace("\t", " ").replace("\n", " ").strip()
+    if len(value) <= MAX_TITLE:
+        return value
+    cut = value[:MAX_TITLE]
+    space = cut.rfind(" ")
+    return (cut[:space] if space > 60 else cut).rstrip(" ,-")
+
+
 def main():
     tok = token()
     raw = export(tok)
@@ -145,10 +156,13 @@ def main():
 
     os.makedirs(OUT_DIR, exist_ok=True)
     rows = 0
+    oversize = []
     with open(f"{OUT_DIR}/full_title_feed.tsv", "w", encoding="utf-8") as f:
         f.write("id\ttitle\n")
         for p in products.values():
-            value = p["full_title"].replace("\t", " ").replace("\n", " ").strip()[:150]
+            if len(p["full_title"]) > MAX_TITLE:
+                oversize.append(p)
+            value = clamp(p["full_title"])
             pid = p["id"].rsplit("/", 1)[-1]
             for vid in p["variants"]:
                 f.write(f"shopify_CA_{pid}_{vid.rsplit('/', 1)[-1]}\t{value}\n")
@@ -160,8 +174,16 @@ def main():
         for p in healed:
             f.write(f"{p['handle']}\t{p['title']}\n")
 
+    with open(f"{OUT_DIR}/over_150_chars.txt", "w", encoding="utf-8") as f:
+        f.write("Products whose custom.full_title is longer than Google's 150 character\n")
+        f.write("limit. The feed cuts them at the last whole word, so the tail is lost.\n")
+        f.write("Shorten these by hand to control what survives.\n\n")
+        for p in sorted(oversize, key=lambda x: -len(x["full_title"])):
+            f.write(f"{len(p['full_title'])}\t{p['handle']}\t{p['full_title']}\n")
+
     print(f"wrote {rows} offer rows from {len(products)} active products")
     print(f"backfilled custom.full_title on {len(healed)} products")
+    print(f"{len(oversize)} titles exceed {MAX_TITLE} characters and were cut")
     if rows < 1500:
         print("::warning::feed row count is unexpectedly low, check before trusting it")
     return 0
