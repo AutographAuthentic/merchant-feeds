@@ -1,3 +1,4 @@
 Products whose custom.full_title was empty and got the storefront
 title copied in as a stopgap. Write a proper long-form title for these.
 
+darryl-sittler-replica-hall-of-fame-plaque-autographed	Darryl Sittler Autographed Replica Hockey Hall of Fame Plaque
