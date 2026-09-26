@@ -1,5 +1,3 @@
 Products whose custom.full_title was empty and got the storefront
 title copied in as a stopgap. Write a proper long-form title for these.
 
-wrapped-canvas-art-ryan-lewis-toronto-skyline-photo-dark-sky-aaapa33540	Ryan Lewis “Toronto After Dark” Wrapped Canvas Photo Print (30x10)
-wrapped-canvas-art-ryan-lewis-toronto-skyline-photo-warm-sky-aaapa33541	Ryan Lewis “City of Gold” Wrapped Canvas Photo Print (30x10)
