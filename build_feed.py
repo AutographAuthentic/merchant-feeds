@@ -5,6 +5,11 @@ shoppers. Google Shopping wants the long, keyword-rich form. The long form
 lives in the Shopify product metafield custom.full_title, and Merchant Center
 reads it from the TSV this script writes.
 
+The metafield is stored ALL CAPS for historical reasons. Google's product data
+spec says not to use block capitals in the title attribute, so titlecase.py
+recases every value on the way out. The metafield itself is never rewritten,
+which keeps the Shopify side stable and makes a revert one commit.
+
 The feed also carries `size`. Career Jerseys that ship as a wearable garment
 have a variant titled "Loose Jersey"; those offers get size L/XL. Framed and
 Premium Number editions do not carry that variant title, so they are excluded
@@ -22,6 +27,8 @@ import sys
 import time
 import urllib.request
 
+from titlecase import build_casing, titlecase, unlearned
+
 SHOP = os.environ["SHOPIFY_SHOP"]
 CLIENT_ID = os.environ["SHOPIFY_CLIENT_ID"]
 CLIENT_SECRET = os.environ["SHOPIFY_CLIENT_SECRET"]
@@ -31,6 +38,8 @@ MAX_TITLE = 150  # Google's hard limit on the title attribute
 SIZE_VARIANT = "loose jersey"
 SIZE_VALUE = "L/XL"
 
+# tags, vendor and productType are here to teach titlecase.py the store's own
+# spelling of player names, teams and leagues. They are not written to the feed.
 BULK_QUERY = """
 {
   products(query: "status:active") {
@@ -38,6 +47,9 @@ BULK_QUERY = """
       id
       title
       handle
+      vendor
+      productType
+      tags
       metafield(namespace: "custom", key: "full_title") { value }
       variants { edges { node { id title } } }
     } }
@@ -148,6 +160,9 @@ def main():
                 "id": o["id"],
                 "title": o["title"],
                 "handle": o["handle"],
+                "vendor": o.get("vendor") or "",
+                "productType": o.get("productType") or "",
+                "tags": o.get("tags") or [],
                 "full_title": (o.get("metafield") or {}).get("value") or "",
                 "variants": [],
             }
@@ -164,16 +179,25 @@ def main():
 
     healed = backfill(tok, products)
 
+    # Learn the store's own casing before touching any title.
+    casing = build_casing(products.values())
+    print(f"learned casing for {len(casing)} distinct tokens")
+
     os.makedirs(OUT_DIR, exist_ok=True)
     rows = 0
     sized = 0
+    recased = 0
     oversize = []
     with open(f"{OUT_DIR}/full_title_feed.tsv", "w", encoding="utf-8") as f:
         f.write("id\ttitle\tsize\n")
         for p in products.values():
-            if len(p["full_title"]) > MAX_TITLE:
+            # Recase first, then clamp, so the length check runs on what Google gets.
+            cased = titlecase(p["full_title"], casing)
+            if cased != p["full_title"]:
+                recased += 1
+            if len(cased) > MAX_TITLE:
                 oversize.append(p)
-            value = clamp(p["full_title"])
+            value = clamp(cased)
             pid = p["id"].rsplit("/", 1)[-1]
             for vid, vtitle in p["variants"]:
                 size = SIZE_VALUE if SIZE_VARIANT in vtitle.lower() else ""
@@ -197,8 +221,17 @@ def main():
         for p in sorted(oversize, key=lambda x: -len(x["full_title"])):
             f.write(f"{len(p['full_title'])}\t{p['handle']}\t{p['full_title']}\n")
 
+    guesses = unlearned((p["full_title"] for p in products.values()), casing)
+    with open(f"{OUT_DIR}/titlecase_review.txt", "w", encoding="utf-8") as f:
+        f.write("Tokens the store never writes in mixed case, so titlecase.py had to\n")
+        f.write("apply the generic rule. Check these read correctly; add anything that\n")
+        f.write("should stay upper case to ACRONYMS, or a misspelled name to NAMES.\n\n")
+        for tokn, n in guesses.most_common():
+            f.write(f"{n}\t{tokn}\t{titlecase(tokn, casing)}\n")
+
     print(f"wrote {rows} offer rows from {len(products)} active products")
     print(f"backfilled custom.full_title on {len(healed)} products")
+    print(f"recased {recased} titles out of block capitals")
     print(f"{sized} offers tagged size {SIZE_VALUE}")
     print(f"{len(oversize)} titles exceed {MAX_TITLE} characters and were cut")
     if rows < 1500:
