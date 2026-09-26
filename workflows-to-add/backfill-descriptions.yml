@@ -1,0 +1,60 @@
+# Copy this file to .github/workflows/backfill-descriptions.yml
+#
+# It could not be pushed there directly because the token used to create it has
+# no `workflow` scope. Nothing else about it needs changing.
+#
+# Run it from the Actions tab. It is manual only and never scheduled.
+#   apply = no   (default)  export the proposal and the rollback, touch nothing
+#   apply = yes             also write the descriptions to Shopify
+
+name: Backfill product descriptions
+
+on:
+  workflow_dispatch:
+    inputs:
+      apply:
+        description: 'Write to Shopify? Type yes to apply, anything else is a dry run.'
+        required: true
+        default: 'no'
+      word_threshold:
+        description: 'Only rewrite products under this many words.'
+        required: false
+        default: '50'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: product-descriptions
+  cancel-in-progress: false
+
+jobs:
+  backfill:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Run backfill
+        env:
+          SHOPIFY_SHOP: ${{ secrets.SHOPIFY_SHOP }}
+          SHOPIFY_CLIENT_ID: ${{ secrets.SHOPIFY_CLIENT_ID }}
+          SHOPIFY_CLIENT_SECRET: ${{ secrets.SHOPIFY_CLIENT_SECRET }}
+          WORD_THRESHOLD: ${{ github.event.inputs.word_threshold }}
+          APPLY: ${{ github.event.inputs.apply == 'yes' && '1' || '0' }}
+        run: python backfill_descriptions.py
+
+      - name: Commit the proposal and the rollback
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add descriptions/
+          if git diff --cached --quiet; then
+            echo "nothing changed"
+          else
+            git commit -m "descriptions: run ${{ github.run_number }} (apply=${{ github.event.inputs.apply }})"
+            git push
+          fi
