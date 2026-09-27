@@ -1,8 +1,9 @@
 """Backfill product descriptions on careerjerseys.com.
 
 Dry run by default. It exports every active product, composes a new description
-for the thin ones with descriptions.py, and writes both the proposal and a
-rollback file. Nothing reaches Shopify unless APPLY=1 is set.
+for the thin ones with descriptions.py, repairs punctuation on the rest, and
+writes a proposal and a rollback file for both passes. Nothing reaches Shopify
+unless APPLY=1 is set.
 
     python backfill_descriptions.py            # proposal + rollback only
     APPLY=1 python backfill_descriptions.py    # also writes to Shopify
@@ -11,6 +12,7 @@ Outputs, committed by the workflow so every run is reviewable in git:
     descriptions/proposed.csv   product_id, title, old_words, new_words, html
     descriptions/rollback.csv   product_id, previous descriptionHtml
     descriptions/skipped.csv    products left alone, with the reason
+    descriptions/repaired.csv   punctuation repairs, before and after
 """
 
 import csv
@@ -21,6 +23,7 @@ import time
 import urllib.request
 
 from descriptions import build, words
+from repair_punctuation import changed as repair_changed, safe as repair_safe
 
 SHOP = os.environ["SHOPIFY_SHOP"]
 CLIENT_ID = os.environ["SHOPIFY_CLIENT_ID"]
@@ -187,9 +190,37 @@ def main():
         w.writerow(["product_id", "title", "reason"])
         w.writerows(skipped)
 
+    # Second pass: punctuation repair across every active product the rewrite
+    # left alone. Those kept whatever punctuation they already had, and a lot of
+    # it carries em dashes, which are not allowed in our copy. Products
+    # rewritten above are skipped because build() already produces clean text.
+    rewritten = {p["pid"] for p in targets}
+    repairs = []
+    for p in products:
+        if p["pid"] in rewritten:
+            continue
+        fixed = repair_changed(p["descriptionHtml"])
+        if not fixed:
+            continue
+        if not repair_safe(p["descriptionHtml"], fixed):
+            raise SystemExit(
+                f"Punctuation repair altered more than punctuation on {p['pid']}. "
+                "Refusing to write anything."
+            )
+        repairs.append({**p, "html": fixed})
+    print(f"{len(repairs)} products need punctuation repair")
+
+    with open(f"{OUT_DIR}/repaired.csv", "w", newline="", encoding="utf-8") as f:
+        w = csv.writer(f)
+        w.writerow(["product_id", "handle", "title", "before_html", "after_html"])
+        for p in repairs:
+            w.writerow([p["pid"], p["handle"], p["title"],
+                        p["descriptionHtml"], p["html"]])
+
     if not APPLY:
         print("DRY RUN. Nothing written to Shopify.")
-        print(f"Review {OUT_DIR}/proposed.csv, then re-run with APPLY=1.")
+        print(f"Review {OUT_DIR}/proposed.csv and {OUT_DIR}/repaired.csv, "
+              "then re-run with APPLY=1.")
         return 0
 
     for i in range(0, len(targets), 25):
@@ -198,7 +229,15 @@ def main():
         print(f"applied {i + len(batch)} of {len(targets)}")
         time.sleep(1)
     print(f"done. {len(targets)} descriptions written.")
-    print(f"Rollback values are in {OUT_DIR}/rollback.csv")
+
+    for i in range(0, len(repairs), 25):
+        batch = repairs[i:i + 25]
+        apply_batch(tok, batch)
+        print(f"repaired {i + len(batch)} of {len(repairs)}")
+        time.sleep(1)
+    print(f"done. {len(repairs)} descriptions repaired.")
+
+    print(f"Rollback values are in {OUT_DIR}/rollback.csv and {OUT_DIR}/repaired.csv")
     return 0
 
 
