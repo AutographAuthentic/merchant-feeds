@@ -1,3 +1,6 @@
 Products whose custom.full_title was empty and got the storefront
 title copied in as a stopgap. Write a proper long-form title for these.
 
+jersey-juraj-slafkovsky-montreal-canadiens-red-replica-autographed-aaajh33594	Juraj Slafkovsky Autographed Montreal Canadiens Red Jersey
+jersey-jakub-dobes-montreal-canadiens-red-premium-autographed-aaajh33592	Jakub Dobes Autographed Montreal Canadiens Red Jersey
+jersey-ivan-demidov-montreal-canadiens-red-breakaway-autographed-aaajh33593	Ivan Demidov Autographed Montreal Canadiens Red Jersey
