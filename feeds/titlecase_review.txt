@@ -2,7 +2,7 @@ Tokens the store never writes in mixed case, so titlecase.py had to
 apply the generic rule. Check these read correctly; add anything that
 should stay upper case to ACRONYMS, or a misspelled name to NAMES.
 
-329	HAND	Hand
+342	HAND	Hand
 149	OR	Or
 18	INCHES	Inches
 16	RARE	Rare
@@ -193,7 +193,6 @@ should stay upper case to ACRONYMS, or a misspelled name to NAMES.
 1	NEXT	Next
 1	CENTURY	Century
 1	THICK	Thick
-1	AUTO	Auto
 1	SPLIT	Split
 1	PTS	Pts
 1	BLOCKING	Blocking
