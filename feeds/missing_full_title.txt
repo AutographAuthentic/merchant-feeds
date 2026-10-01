@@ -1,14 +1,3 @@
 Products whose custom.full_title was empty and got the storefront
 title copied in as a stopgap. Write a proper long-form title for these.
 
-framed-macklin-celebrini-autographed-san-jose-sharks-print-limited-edition-25-42-x-20	Macklin Celebrini Autographed Sharks Framed Print
-macklin-celebrini-autographed-san-jose-sharks-fanatics-jersey	Macklin Celebrini Autographed San Jose Sharks Fanatics Jersey
-toronto-blue-jays-vintage-1992-world-series-commemorative-poster-framed-36x24	Toronto Blue Jays Vintage 1992 World Series Commemorative Poster - Framed 36"x24"
-macklin-celebrini-san-jose-sharks-framed-hockey-photo-16-x-20	Macklin Celebrini San Jose Sharks Framed Hockey Photo (16" x 20")
-gavin-mckenna-first-nhl-goal-toronto-maple-leafs-framed-hockey-photo-16-x-20	Gavin McKenna First NHL Goal Toronto Maple Leafs Framed Hockey Photo (16" x 20")
-erik-karlsson-pittsburgh-penguins-framed-hockey-photo-16-x-20	Erik Karlsson Pittsburgh Penguins Framed Hockey Photo (16" x 20")
-william-karlsson-vegas-golden-knights-framed-hockey-photo-16-x-20	William Karlsson Vegas Golden Knights Framed Hockey Photo (16" x 20")
-grand-theft-auto-vi-framed-video-game-art-16-x-20	Grand Theft Auto VI Framed Video Game Art (16" x 20")
-lionel-messi-fifa-championship-with-argentina-framed-photo-16-x-20	Lionel Messi FIFA Championship with Argentina Framed Photo (16" x 20")
-josh-allen-buffalo-bills-framed-football-photo-16-x-20	Josh Allen Buffalo Bills Framed Football Photo (16" x 20")
-spider-man-and-iron-man-marvel-framed-photo-16-x-20	Spider-Man and Iron Man Marvel Framed Photo (16" x 20")
