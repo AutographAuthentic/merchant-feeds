@@ -2,8 +2,8 @@ Tokens the store never writes in mixed case, so titlecase.py had to
 apply the generic rule. Check these read correctly; add anything that
 should stay upper case to ACRONYMS, or a misspelled name to NAMES.
 
-342	HAND	Hand
-149	OR	Or
+333	HAND	Hand
+143	OR	Or
 18	INCHES	Inches
 16	RARE	Rare
 15	CERTIFIED	Certified
@@ -14,8 +14,8 @@ should stay upper case to ACRONYMS, or a misspelled name to NAMES.
 7	LEGENDARY	Legendary
 7	FANS	Fans
 7	ARTWORK	Artwork
-7	OVERSIZED	Oversized
 6	FEATURING	Featuring
+6	OVERSIZED	Oversized
 6	SKYLINE	Skyline
 5	FLAT	Flat
 4	LANDSCAPE	Landscape
@@ -32,10 +32,8 @@ should stay upper case to ACRONYMS, or a misspelled name to NAMES.
 3	IMAGE	Image
 3	LOVER	Lover
 3	STARSHIP	Starship
-3	AUTHENTICATED	Authenticated
 3	LAKE'	Lake'
 3	ICON	Icon
-3	SOUVENIR	Souvenir
 3	STARRY	Starry
 3	MOUNTAIN	Mountain
 3	FLOATING	Floating
@@ -51,12 +49,13 @@ should stay upper case to ACRONYMS, or a misspelled name to NAMES.
 2	CARDS	Cards
 2	ED.	Ed.
 2	QUALITY	Quality
-2	INSCRIPTION	Inscription
+2	SOVIET	Soviet
 2	MR.	Mr.
 2	TECHNICAL	Technical
 2	SCHEMATIC	Schematic
 2	DETAILED	Detailed
 2	SIGNATURES	Signatures
+2	AUTHENTICATED	Authenticated
 2	HEAT	Heat
 2	SUPERSTAR	Superstar
 2	TRUCK	Truck
@@ -83,6 +82,7 @@ should stay upper case to ACRONYMS, or a misspelled name to NAMES.
 2	KIND	Kind
 2	J.S.	J.S.
 2	MODEL	Model
+2	SOUVENIR	Souvenir
 2	FAREWELL	Farewell
 2	BETWEEN	Between
 2	PIPES	Pipes
@@ -120,6 +120,7 @@ should stay upper case to ACRONYMS, or a misspelled name to NAMES.
 1	MID-AIR	Mid-Air
 1	GROGU	Grogu
 1	H.	H.
+1	INSCRIPTION	Inscription
 1	HAND-SIGNED	Hand-Signed
 1	INCLUDED	Included
 1	GIVERS	Givers
@@ -143,7 +144,6 @@ should stay upper case to ACRONYMS, or a misspelled name to NAMES.
 1	ITEMS	Items
 1	TREKKIE	Trekkie
 1	MAY	May
-1	INCH	Inch
 1	COSTUME	Costume
 1	SUNGLASSES	Sunglasses
 1	DECAL	Decal
@@ -201,7 +201,6 @@ should stay upper case to ACRONYMS, or a misspelled name to NAMES.
 1	PASS	Pass
 1	KISSING	Kissing
 1	BANDIT	Bandit
-1	TOURNAMENT	Tournament
 1	WALK	Walk
 1	OFF	Off
 1	OCTOPUS	Octopus
@@ -229,13 +228,10 @@ should stay upper case to ACRONYMS, or a misspelled name to NAMES.
 1	INTRO	Intro
 1	FIELDING	Fielding
 1	FANFARE	Fanfare
-1	CKSA	Cksa
 1	CATCH	Catch
 1	BEARER	Bearer
 1	PITCH	Pitch
 1	STEP	Step
-1	METALLIC	Metallic
-1	CAMERA	Camera
 1	SIMMER	Simmer
 1	ELEGANT	Elegant
 1	WINNER	Winner
