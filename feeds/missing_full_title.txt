@@ -1,7 +1,3 @@
 Products whose custom.full_title was empty and got the storefront
 title copied in as a stopgap. Write a proper long-form title for these.
 
-bobby-orr-the-goal-framed-photo-with-cut-signature-1-of-244-24x20	Bobby Orr the Goal Framed Photo with Cut Signature #1 of 244 (24x20)
-bobby-orr-the-goal-framed-photo-with-cut-signature-4-of-244-24x20	Bobby Orr the Goal Framed Photo with Cut Signature #4 of 244 (24x20)
-bobby-orr-the-goal-framed-photo-with-cut-signature-70-of-244-24x20	Bobby Orr the Goal Framed Photo with Cut Signature #70 of 244 (24x20)
-bobby-orr-the-goal-framed-photo-with-cut-signature-244-of-244-24x20	Bobby Orr the Goal Framed Photo with Cut Signature #244 of 244 (24x20)
