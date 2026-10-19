@@ -19,6 +19,7 @@ should stay upper case to ACRONYMS, or a misspelled name to NAMES.
 6	SKYLINE	Skyline
 5	FLAT	Flat
 4	LANDSCAPE	Landscape
+4	CARDS	Cards
 4	LTD.	Ltd.
 4	SCI	Sci
 4	FI	Fi
@@ -34,6 +35,7 @@ should stay upper case to ACRONYMS, or a misspelled name to NAMES.
 3	STARSHIP	Starship
 3	LAKE'	Lake'
 3	ICON	Icon
+3	GUARANTEED	Guaranteed
 3	STARRY	Starry
 3	MOUNTAIN	Mountain
 3	FLOATING	Floating
@@ -46,7 +48,6 @@ should stay upper case to ACRONYMS, or a misspelled name to NAMES.
 2	ENTHUSIASTS	Enthusiasts
 2	PREQUEL	Prequel
 2	THEATER	Theater
-2	CARDS	Cards
 2	ED.	Ed.
 2	QUALITY	Quality
 2	SOVIET	Soviet
@@ -71,6 +72,7 @@ should stay upper case to ACRONYMS, or a misspelled name to NAMES.
 2	BIKER	Biker
 2	SHOW	Show
 2	ALCS	Alcs
+2	GRADED	Graded
 2	MEMOIR	Memoir
 2	TOP	Top
 2	ADULT	Adult
@@ -91,7 +93,6 @@ should stay upper case to ACRONYMS, or a misspelled name to NAMES.
 2	BOWMAN	Bowman
 2	ADMIRAL	Admiral
 2	ACKBAR	Ackbar
-2	GUARANTEED	Guaranteed
 2	WATERFRONT	Waterfront
 2	GALLERY	Gallery
 2	AWAY	Away
@@ -185,7 +186,6 @@ should stay upper case to ACRONYMS, or a misspelled name to NAMES.
 1	BACKGROUND	Background
 1	ENTERPRISE-D	Enterprise-D
 1	TREASURE	Treasure
-1	GRADED	Graded
 1	MARITIME	Maritime
 1	HARDCOVER	Hardcover
 1	DETRIOT	Detriot
@@ -250,3 +250,5 @@ should stay upper case to ACRONYMS, or a misspelled name to NAMES.
 1	SNOWY	Snowy
 1	WARM	Warm
 1	SKY	Sky
+1	PACKS	Packs
+1	BORDER	Border

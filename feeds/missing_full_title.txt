@@ -1,3 +1,4 @@
 Products whose custom.full_title was empty and got the storefront
 title copied in as a stopgap. Write a proper long-form title for these.
 
+collectors-crate-series-star-wars-cards-series-2-aacmc33613	COLLECTOR'S CRATE MYSTERY BOX, STAR WARS TRADING CARDS SERIES 2, LIMITED TO 50 PACKS, GRADED VINTAGE CARDS WITH A GUARANTEED 1977 BLUE BORDER CARD
