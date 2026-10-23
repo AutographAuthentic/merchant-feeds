@@ -1,3 +1,4 @@
 Products whose custom.full_title was empty and got the storefront
 title copied in as a stopgap. Write a proper long-form title for these.
 
+ivan-demidov-canadiens-red-heritage-classic-premium-jersey	Ivan Demidov Canadiens Red Heritage Classic Premium Jersey
