@@ -72,7 +72,6 @@ should stay upper case to ACRONYMS, or a misspelled name to NAMES.
 2	BIKER	Biker
 2	SHOW	Show
 2	ALCS	Alcs
-2	GRADED	Graded
 2	MEMOIR	Memoir
 2	TOP	Top
 2	ADULT	Adult
@@ -252,3 +251,4 @@ should stay upper case to ACRONYMS, or a misspelled name to NAMES.
 1	SKY	Sky
 1	PACKS	Packs
 1	BORDER	Border
+1	LOTS	Lots
