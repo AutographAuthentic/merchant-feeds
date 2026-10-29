@@ -3,7 +3,7 @@ apply the generic rule. Check these read correctly; add anything that
 should stay upper case to ACRONYMS, or a misspelled name to NAMES.
 
 333	HAND	Hand
-142	OR	Or
+141	OR	Or
 18	INCHES	Inches
 16	RARE	Rare
 15	CERTIFIED	Certified
@@ -50,7 +50,6 @@ should stay upper case to ACRONYMS, or a misspelled name to NAMES.
 2	THEATER	Theater
 2	ED.	Ed.
 2	QUALITY	Quality
-2	SOVIET	Soviet
 2	MR.	Mr.
 2	TECHNICAL	Technical
 2	SCHEMATIC	Schematic
@@ -120,6 +119,7 @@ should stay upper case to ACRONYMS, or a misspelled name to NAMES.
 1	MID-AIR	Mid-Air
 1	GROGU	Grogu
 1	H.	H.
+1	SOVIET	Soviet
 1	INSCRIPTION	Inscription
 1	HAND-SIGNED	Hand-Signed
 1	INCLUDED	Included
