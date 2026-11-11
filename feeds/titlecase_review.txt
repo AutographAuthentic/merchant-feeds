@@ -79,7 +79,6 @@ should stay upper case to ACRONYMS, or a misspelled name to NAMES.
 2	CERTIFICATE	Certificate
 2	AUTHENTICITY	Authenticity
 2	SHADOWBOX	Shadowbox
-2	KIND	Kind
 2	J.S.	J.S.
 2	MODEL	Model
 2	SOUVENIR	Souvenir

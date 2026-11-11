@@ -1,3 +1,4 @@
 Products whose custom.full_title was empty and got the storefront
 title copied in as a stopgap. Write a proper long-form title for these.
 
+bobby-orr-frozen-in-time-table-1970-stanley-cup-3-of-4	Bobby Orr Frozen In Time Table, 1970 Stanley Cup, 3 of 4
