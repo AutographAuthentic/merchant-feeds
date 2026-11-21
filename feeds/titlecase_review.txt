@@ -2,9 +2,9 @@ Tokens the store never writes in mixed case, so titlecase.py had to
 apply the generic rule. Check these read correctly; add anything that
 should stay upper case to ACRONYMS, or a misspelled name to NAMES.
 
-333	HAND	Hand
+334	HAND	Hand
 138	OR	Or
-18	INCHES	Inches
+19	INCHES	Inches
 16	RARE	Rare
 15	CERTIFIED	Certified
 12	WEARABLE	Wearable
@@ -17,9 +17,9 @@ should stay upper case to ACRONYMS, or a misspelled name to NAMES.
 6	FEATURING	Featuring
 6	OVERSIZED	Oversized
 6	SKYLINE	Skyline
+5	CARDS	Cards
 5	FLAT	Flat
 4	LANDSCAPE	Landscape
-4	CARDS	Cards
 4	LTD.	Ltd.
 4	SCI	Sci
 4	FI	Fi
@@ -63,6 +63,8 @@ should stay upper case to ACRONYMS, or a misspelled name to NAMES.
 2	SHOOTING	Shooting
 2	ONLY	Only
 2	AVAILABLE	Available
+2	LUKE	Luke
+2	SKYWALKER	Skywalker
 2	SCENE	Scene
 2	CULT	Cult
 2	MOTION	Motion
@@ -157,8 +159,6 @@ should stay upper case to ACRONYMS, or a misspelled name to NAMES.
 1	MORE	More
 1	INCLUDING	Including
 1	PRIZE-WINNING	Prize-Winning
-1	LUKE	Luke
-1	SKYWALKER	Skywalker
 1	DUEL	Duel
 1	TATOOINE	Tatooine
 1	CONCEPT	Concept
@@ -252,3 +252,8 @@ should stay upper case to ACRONYMS, or a misspelled name to NAMES.
 1	PACKS	Packs
 1	BORDER	Border
 1	LOTS	Lots
+1	RESIN	Resin
+1	CARDED	Carded
+1	KENNER	Kenner
+1	FIGURES	Figures
+1	CHASE	Chase

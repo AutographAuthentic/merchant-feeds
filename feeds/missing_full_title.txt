@@ -1,4 +1,3 @@
 Products whose custom.full_title was empty and got the storefront
 title copied in as a stopgap. Write a proper long-form title for these.
 
-collectors-crate-elite-series-star-wars-aacmc33622	Star Wars Elite Vintage Mystery Crate, Limited to 13
