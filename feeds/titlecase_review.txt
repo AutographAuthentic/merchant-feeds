@@ -33,6 +33,7 @@ should stay upper case to ACRONYMS, or a misspelled name to NAMES.
 3	IMAGE	Image
 3	LOVER	Lover
 3	STARSHIP	Starship
+3	AUTHENTICATED	Authenticated
 3	LAKE'	Lake'
 3	ICON	Icon
 3	GUARANTEED	Guaranteed
@@ -55,7 +56,6 @@ should stay upper case to ACRONYMS, or a misspelled name to NAMES.
 2	SCHEMATIC	Schematic
 2	DETAILED	Detailed
 2	SIGNATURES	Signatures
-2	AUTHENTICATED	Authenticated
 2	HEAT	Heat
 2	SUPERSTAR	Superstar
 2	TRUCK	Truck
@@ -257,3 +257,6 @@ should stay upper case to ACRONYMS, or a misspelled name to NAMES.
 1	KENNER	Kenner
 1	FIGURES	Figures
 1	CHASE	Chase
+1	EMANATE	Emanate
+1	ENCASED	Encased
+1	FANSECURE	Fansecure
