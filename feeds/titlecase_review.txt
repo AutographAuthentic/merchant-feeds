@@ -3,7 +3,7 @@ apply the generic rule. Check these read correctly; add anything that
 should stay upper case to ACRONYMS, or a misspelled name to NAMES.
 
 334	HAND	Hand
-138	OR	Or
+135	OR	Or
 19	INCHES	Inches
 16	RARE	Rare
 15	CERTIFIED	Certified
